@@ -30,7 +30,7 @@ senitivity factor=2000/total daily insulin requirement
 carb ratio=450/total daily insulin requirement
 }
 \examples{
-insulindose(170,48,40)
+insulindose2(170,48,40)
 }
 \author{
 Chi Tang

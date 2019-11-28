@@ -16,7 +16,7 @@
 ##' @author Chi Tang
 ##' @export
 ##' @examples
-##' insulindose(170,48,40)
+##' insulindose2(170,48,40)
 insulindose2<-function(glucose,carb,insulin){
   sensitivity_factor<-2000/insulin
   carb_ratio<-450/insulin
