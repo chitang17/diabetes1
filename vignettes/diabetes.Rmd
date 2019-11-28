@@ -1,0 +1,35 @@
+---
+title: "diabetes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{diabetes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+This package is designed to help endocrinologists,patients and insulin pump to predict the correct insulin dose. For diabetes patients, they need to take additional insulin when their blood gluocse is elevated or when they eat carbohydrate. The dose of insulin is calculated by using functions in this package.
+The first step is to library the package
+```{r setup}
+library(diabetes)
+```
+The dose of insulin is derived by adding insulin for carbohydrate and insulin for correcting high blood glucose. Insulin for carbohydrate is calculated by carb (in grams) devided by carb ratio (the amount of insulin needed for each gram of carb intake).The insulin for correcting high blood glucose is calculated by glucose level(in mg/dL) divided by sensitivity factor (the amount of blood glucose reduction with 1 unit of insulin).The ideal blood glucose is 120. The default for sensitivity factor is 50 ad for carb ratio is 12. When blood glucose is less than 80, it is too low and no insulin is required.
+The following example calculate insulin dose for someone who consumes 60 grams of carb and blood glucose is 170 mg/dL. The calculated dose is 6 units of insulin. We use the function "insulin dose"
+```{r}
+insulindose(170,60)
+```
+In some situations (e.g. type 1 diabetes, severe obesity), we do not believe the sensitivity factor is 50 or we do not believe carb ratio is 12. Then we will need to derive sensitivity factor and carb ratio by total daily insulin requirement. Conventionally, sensitivity factor is equal to 2000 devided by total daily insulin requirement, and carb ratio is equal to 450 devided by total daily insulin need. 
+By using function "insulin dose 2", we imput current glucose level, carb and total daily insulin requirement (from clinical record), and it will output insulin dose.
+The following example calculates insulin dose for someone who consumes 54 grams of carb, blood glucose is 160 mg/dL, and total daily requirement is 50 units. The calculated dose is 7 units
+```{r}
+insulindose2(160,54,50)
+```
+The following example calculates someone who consumes 54 grams of carb, total daily insulin requirement is 50 units, but blood glucose is 50 mg/dL. No insulin should be given, as blood glucose is too low. 
+```{r}
+insulindose2(50,54,50)
+```

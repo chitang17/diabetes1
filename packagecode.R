@@ -1,0 +1,10 @@
+devtools::create("diabetes")
+wd2<-"C:/Users/Chi/Documents/diabetes"
+setwd(wd2)
+devtools::document()
+devtools::build()
+usethis::use_testthat()
+devtools::test()
+usethis::use_vignette("diabetes")
+devtools::check()
+devtools::build()
